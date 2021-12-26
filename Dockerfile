@@ -1,3 +1,3 @@
 FROM nginx
 
-COPY index.php /usr/share/nginx/php
+COPY index.html /usr/share/nginx/html
