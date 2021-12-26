@@ -1,24 +1,22 @@
-name: Publish Docker image
-on: push
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ main ]
+
 jobs:
-  main:
-    name: Push Docker image to Github Container Registry
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v1
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
-      - name: Login to GitHub Container Registry
-        uses: docker/login-action@v1
+      - name: Login to DockerHub
+        uses: docker/login-action@v1 
         with:
-          registry: ghcr.io
           username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN  }}
-      - name: Push to GitHub Container Registry
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push
+        id: docker_build
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: mo74x/dr666m1/qiita_starwars:latest
+          tags: mo74x/java-hello-world-from-github-actions:latest
