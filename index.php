@@ -1,3 +1,3 @@
 <?php
-echo "a7a";
+echo "welcome to mo_hh";
 ?>
